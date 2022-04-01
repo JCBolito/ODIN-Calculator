@@ -1,0 +1,42 @@
+body,
+.buttons,
+.buttons>* {
+	display: flex;
+}
+
+.buttons>* {}
+
+body {
+	height: 100vh;
+	font-family: Arial, Helvetica, sans-serif;
+	align-items: center;
+	justify-content: center;
+	overflow: hidden;
+}
+
+.calculator {
+	background-color: rgb(105, 105, 105);
+	width: 20vh;
+	padding: 1vh;
+}
+
+.screen {
+	background-color: rgb(173, 203, 185);
+	text-align: right;
+	padding: 0.5vh;
+	margin-bottom: 0.5vh;
+}
+
+.numbers {
+	flex-flow: row wrap-reverse;
+}
+
+.operations {
+	flex-flow: row wrap;
+}
+
+.btn {
+	margin: 0.2vh;
+	height: 3vh;
+	width: 3vh;
+}
