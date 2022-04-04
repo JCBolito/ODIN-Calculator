@@ -27,3 +27,19 @@ function operate(a, operator, b) {
 	else if (operator === '/')
 		return divide(a, b);
 }
+
+function getNumber(num) {
+	numberButtons.forEach((button) => {
+		button.addEventListener('click', () => {
+			num = parseFloat(button.id);
+			screen.textContent += num;
+		});
+	});
+}
+
+let num1 = 0;
+let num2 = 0;
+const screen = document.querySelector('.screen');
+const numberGroup = document.querySelector('.numbers');
+const numberButtons = numberGroup.querySelectorAll('.btn');
+num1 = getNumber(num1);
