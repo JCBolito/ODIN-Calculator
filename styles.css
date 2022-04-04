@@ -1,12 +1,13 @@
 body,
+.screen,
 .buttons,
 .buttons>* {
 	display: flex;
 }
 
-.buttons>* {}
 
 body {
+	background-color: rgb(227, 227, 227);
 	height: 100vh;
 	font-family: Arial, Helvetica, sans-serif;
 	align-items: center;
@@ -15,20 +16,38 @@ body {
 }
 
 .calculator {
-	background-color: rgb(105, 105, 105);
-	width: 20vh;
+	background-color: rgb(62, 62, 62);
+	width: 25vh;
+
 	padding: 1vh;
+	border-radius: 1.5vh;
 }
 
 .screen {
 	background-color: rgb(173, 203, 185);
-	text-align: right;
+	height: 2vh;
+	width: auto;
+	font-size: 2vh;
+	border-radius: 0.5vh;
+	align-items: center;
+	justify-content: end;
 	padding: 0.5vh;
-	margin-bottom: 0.5vh;
+	margin-bottom: 1vh;
+}
+
+.buttons {
+	gap: 1vh;
+}
+
+.numbers,
+.operations {
+	width: auto;
+	justify-content: center;
+	gap: 1.2vh;
 }
 
 .numbers {
-	flex-flow: row wrap-reverse;
+	flex-flow: row-reverse wrap;
 }
 
 .operations {
@@ -36,7 +55,19 @@ body {
 }
 
 .btn {
-	margin: 0.2vh;
+	font-size: 1.2vh;
+	color: white;
+	background-color: rgb(34, 34, 34);
 	height: 3vh;
-	width: 3vh;
+	width: 4vh;
+	padding: 0;
+	border-radius: 0.5vh;
+}
+
+.operations .btn {
+	background-color: rgb(255, 97, 39);
+}
+
+.btnEqual {
+	width: 9vh;
 }
