@@ -24,6 +24,7 @@ body {
 }
 
 .screen {
+	overflow: hidden;
 	background-color: rgb(173, 203, 185);
 	height: 2vh;
 	width: auto;
