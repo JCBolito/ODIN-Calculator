@@ -35,7 +35,6 @@ const numberGroup = document.querySelector('.numbers');
 const numberButtons = numberGroup.querySelectorAll('.btn');
 let num1 = null;
 let num2 = null;
-let result = null;
 let num = '';
 numberButtons.forEach((button) => {
 	button.addEventListener('click', () => {
@@ -53,7 +52,6 @@ operators.forEach((button) => {
 		if (button.id == 'AC') {
 			num1 = null;
 			num2 = null;
-			result = null;
 			num = '';
 			screen.textContent = '|';
 		}
@@ -76,7 +74,7 @@ operators.forEach((button) => {
 			screen.textContent = '|';
 		}
 		else if (button.id == 'X') {
-			operator = 'X'
+			operator = 'X';
 			num1 = +num;
 			num = '';
 			screen.textContent = '|';
@@ -90,11 +88,11 @@ operators.forEach((button) => {
 		else if (button.id == '=') {
 			if (num2 == null) {
 				num2 = +num;
-				num2 = operate(num1, operator, num2).toFixed(2);
+				num2 = operate(num1, operator, num2).toFixed(2).replace('.00', '');
 			}
 			else {
 				num1 = +num;
-				num2 = operate(num2, operator, num1).toFixed(2);
+				num2 = operate(num2, operator, num1).toFixed(2).replace('.00', '');
 			}
 			screen.textContent = num2;
 			num1 = null;
