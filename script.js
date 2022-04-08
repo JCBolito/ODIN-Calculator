@@ -1,4 +1,4 @@
-// Operate
+// OPERATE
 function operate(a, operator, b) {
 	// ADD
 	if (operator === '+')
@@ -14,45 +14,46 @@ function operate(a, operator, b) {
 		return (a / b).toFixed(2).replace('.00', '');
 }
 
+// Processes running equations.
+// ((1 + 1) + 1)
 function clear() {
-	if (num1 == null & num2 == null) {
+	screen.textContent = '|';
+	//Checks if a value in the expression is not a number.
+	if (isNaN(+num))
+		screen.textContent = 'Syntax Error!';
+	else if (operator == '' && num1 == null) {
 		num1 = +num;
-		screen.textContent = '|';
 		num = '';
 	}
-
-	else if (num1 != null) {
+	else if (operator != '' && num1 != null) {
 		num2 = +num;
-		result = +operate(num1, operator, num2);
-		screen.textContent = result;
+		num1 = +operate(num1, operator, num2);
+		screen.textContent = num1;
 		num = '';
-		num1 = null;
+		operator = '';
 	}
-	else if (num2 != null && num1 == null) {
-		num1 = +num;
-		num2 = +result
-		result = +operate(num1, operator, num2);
-		screen.textContent = result;
-		num = '';
-		num1 = null;
-	}
-
 }
-
+// Processes equations and displays result.
 function displayResult() {
-	screen.textContent = num2;
-	num1 = null;
+	num2 = +num;
+	num1 = +operate(num1, operator, num2);
+	screen.textContent = num1;
+	num = '';
+	num2 = null;
+	operator = '';
 }
 
+// Button functionality of operations.
 function operations(button) {
 	if (button.id == 'AC') {
+		num = '';
 		num1 = null;
 		num2 = null;
-		num = '';
+		operator = '';
 		screen.textContent = '|';
 	}
 	else if (button.id == 'backSpace') {
-		if (screen.textContent != num2) {
+		if (screen.textContent != num1 && operator == '') {
 			num = num.slice(0, -1);
 			screen.textContent = num;
 			if (num == '')
@@ -60,38 +61,37 @@ function operations(button) {
 		}
 	}
 	else if (button.id == '+') {
-		operator = '+';
 		clear();
+		operator = '+';
 	}
 	else if (button.id == '-') {
-		operator = '-';
 		clear();
+		operator = '-';
 	}
 	else if (button.id == 'X') {
-		operator = 'X';
 		clear();
+		operator = 'X';
 	}
 	else if (button.id == '÷') {
-		operator = '÷';
 		clear();
+		operator = '÷';
 	}
 	else if (button.id == '=') {
-		if (num1 == null && num2 == null)
-			num2 = 0;
-		else if (num1 == null)
-			num2 = +screen.textContent;
-
-		else if (num1 != null && num2 == null) {
-			num2 = +num;
-			num2 = +operate(num1, operator, num2);
+		// No inputted values
+		if (num1 == null && num2 == null) {
+			//Checks if result is not a number
+			if (!(isNaN(+num))) {
+				num1 = +num;
+				screen.textContent = num1;
+				num = '';
+			}
+			else
+				screen.textContent = 'Syntax Error!';
 		}
-		else if (num2 != null) {
-			num1 = +num;
-			num2 = +operate(num2, operator, num1);
-		}
-		displayResult();
-		num1 = null;
-
+		else if (operator == '' && num2 == null)
+			screen.textContent = num1;
+		else
+			displayResult();
 	}
 }
 
@@ -104,19 +104,19 @@ const numberButtons = numberGroup.querySelectorAll('.btn');
 let num = '';
 let num1 = null;
 let num2 = null;
-let result = null;
 
+// NUMBERS
 numberButtons.forEach((button) => {
 	button.addEventListener('click', () => {
 		// Allows user to immediately insert a new
 		// equation after getting the result of the
 		// previout equation.
-		if (num1 == null && num2 != null) {
+		if (num1 != null && operator == '') {
 			num == '';
 			num1 = null;
 			screen.textContent = '';
 		}
-		num += +button.id;
+		num += button.id;
 		screen.textContent = num;
 	});
 
