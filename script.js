@@ -1,31 +1,17 @@
-// Add
-function add(a, b) {
-	return a + b;
-}
-// Subtract
-function subtract(a, b) {
-	return a - b;
-}
-// Multiply
-function multiply(a, b) {
-	return a * b;
-}
-// Divide
-function divide(a, b) {
-	return a / b;
-}
-
 // Operate
 function operate(a, operator, b) {
-	//add
+	// ADD
 	if (operator === '+')
-		return add(a, b).toFixed(2).replace('.00', '');
+		return (a + b).toFixed(2).replace('.00', '');
+	// SUBTRACT
 	else if (operator === '-')
-		return subtract(a, b).toFixed(2).replace('.00', '');
+		return (a - b).toFixed(2).replace('.00', '');
+	// MULTIPLY
 	else if (operator === 'X')
-		return multiply(a, b).toFixed(2).replace('.00', '');
+		return (a * b).toFixed(2).replace('.00', '');
+	// DIVIDE
 	else if (operator === '÷')
-		return divide(a, b).toFixed(2).replace('.00', '');
+		return (a / b).toFixed(2).replace('.00', '');
 }
 
 function clear() {
@@ -37,15 +23,16 @@ function clear() {
 
 	else if (num1 != null) {
 		num2 = +num;
-		num2 = +operate(num1, operator, num2);
-		screen.textContent = num2;
+		result = +operate(num1, operator, num2);
+		screen.textContent = result;
 		num = '';
 		num1 = null;
 	}
 	else if (num2 != null && num1 == null) {
 		num1 = +num;
-		num2 = +operate(num1, operator, num2);
-		screen.textContent = num2;
+		num2 = +result
+		result = +operate(num1, operator, num2);
+		screen.textContent = result;
 		num = '';
 		num1 = null;
 	}
@@ -114,12 +101,16 @@ screen.textContent = '|';
 // NUMBERS
 const numberGroup = document.querySelector('.numbers');
 const numberButtons = numberGroup.querySelectorAll('.btn');
+let num = '';
 let num1 = null;
 let num2 = null;
-let num = '';
+let result = null;
 
 numberButtons.forEach((button) => {
 	button.addEventListener('click', () => {
+		// Allows user to immediately insert a new
+		// equation after getting the result of the
+		// previout equation.
 		if (num1 == null && num2 != null) {
 			num == '';
 			num1 = null;
