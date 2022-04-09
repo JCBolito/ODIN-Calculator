@@ -14,6 +14,15 @@ function operate(a, operator, b) {
 		return (a / b).toFixed(2).replace('.00', '');
 }
 
+function process() {
+	num2 = +num;
+	num1 = +operate(num1, operator, num2);
+	screen.textContent = num1;
+	num = '';
+	operator = '';
+	flag = false; // Set to false to prevent backspacing results.
+}
+
 // Processes running equations.
 // ((1 + 1) + 1)
 function clear() {
@@ -25,22 +34,13 @@ function clear() {
 		num1 = +num;
 		num = '';
 	}
-	else if (operator != '' && num1 != null) {
-		num2 = +num;
-		num1 = +operate(num1, operator, num2);
-		screen.textContent = num1;
-		num = '';
-		operator = '';
-	}
+	else if (operator != '' && num1 != null)
+		process();
 }
 // Processes equations and displays result.
 function displayResult() {
-	num2 = +num;
-	num1 = +operate(num1, operator, num2);
-	screen.textContent = num1;
-	num = '';
+	process();
 	num2 = null;
-	operator = '';
 }
 
 // Button functionality of operations.
@@ -53,7 +53,9 @@ function operations(button) {
 		screen.textContent = '|';
 	}
 	else if (button.id == 'backSpace') {
-		if (screen.textContent != num1 && operator == '') {
+		// If flag is true, the current display is not result, 
+		// hence users can backspace..
+		if (flag) {
 			num = num.slice(0, -1);
 			screen.textContent = num;
 			if (num == '')
@@ -104,6 +106,8 @@ const numberButtons = numberGroup.querySelectorAll('.btn');
 let num = '';
 let num1 = null;
 let num2 = null;
+let operator = '';
+let flag = true; // Signals when backspace can function.
 
 // NUMBERS
 numberButtons.forEach((button) => {
@@ -111,19 +115,18 @@ numberButtons.forEach((button) => {
 		// Allows user to immediately insert a new
 		// equation after getting the result of the
 		// previout equation.
+		flag = true; // Set to true to be able to backspace when inputting new values.
 		if (num1 != null && operator == '') {
 			num == '';
 			num1 = null;
 			screen.textContent = '';
 		}
 		// Allows user to enter a negative value.
-		if (button.id == '-') {
+		if (button.id == '-')
 			num = num * -1;
-		}
 		// Sets value according to pressed number button.
-		else {
+		else
 			num += button.id;
-		}
 		screen.textContent = num;
 	});
 
@@ -132,7 +135,6 @@ numberButtons.forEach((button) => {
 //OPERATORS
 const operatorGroup = document.querySelector('.operations');
 const operators = operatorGroup.querySelectorAll('.btn');
-let operator = '';
 operators.forEach((button) => {
 	button.addEventListener('click', () => {
 		operations(button);
@@ -140,3 +142,8 @@ operators.forEach((button) => {
 });
 
 //KEYDOWN
+
+window.addEventListener('keydown', (e) => {
+	const key = document.querySelector(`button[data-key="${e.key}"]`);
+	console.log(key);
+});
