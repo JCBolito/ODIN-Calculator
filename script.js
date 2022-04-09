@@ -116,7 +116,14 @@ numberButtons.forEach((button) => {
 			num1 = null;
 			screen.textContent = '';
 		}
-		num += button.id;
+		// Allows user to enter a negative value.
+		if (button.id == '-') {
+			num = num * -1;
+		}
+		// Sets value according to pressed number button.
+		else {
+			num += button.id;
+		}
 		screen.textContent = num;
 	});
 
