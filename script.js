@@ -96,7 +96,7 @@ function operations(button) {
 			displayResult();
 	}
 }
-
+// ---------------------------------------------------------------------------
 // MAIN
 const screen = document.querySelector('.screen');
 screen.textContent = '|';
@@ -109,7 +109,7 @@ let num2 = null;
 let operator = '';
 let flag = true; // Signals when backspace can function.
 
-// NUMBERS
+// NUMBERS BUTTON PRESS
 numberButtons.forEach((button) => {
 	button.addEventListener('click', () => {
 		// Allows user to immediately insert a new
@@ -130,9 +130,10 @@ numberButtons.forEach((button) => {
 		screen.textContent = num;
 	});
 
+
 });
 
-//OPERATORS
+//OPERATORS BUTTON PRESS
 const operatorGroup = document.querySelector('.operations');
 const operators = operatorGroup.querySelectorAll('.btn');
 operators.forEach((button) => {
@@ -141,9 +142,10 @@ operators.forEach((button) => {
 	});
 });
 
-//KEYDOWN
-
+//KEYBOARD SUPPORT
 window.addEventListener('keydown', (e) => {
-	const key = document.querySelector(`button[data-key="${e.key}"]`);
-	console.log(key);
+	let key = document.querySelector(`button[data-key="${e.key}"]`);
+	if (!key) return;
+	key.click();
 });
+
